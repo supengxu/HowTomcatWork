@@ -1,3 +1,5 @@
+package Requrest;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,7 +10,7 @@ import java.util.Map;
 import javax.servlet.*;
 
 
-public class Request extends ServletRequest {
+public class Request implements ServletRequest {
 
     private InputStream input;
     private String uri;
@@ -74,6 +76,7 @@ public class Request extends ServletRequest {
     public int getContentLength() {
         return 0;
     }
+
 
     @Override
     public String getContentType() {

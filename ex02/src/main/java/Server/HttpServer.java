@@ -1,3 +1,10 @@
+package Server;
+import Processor.IProcessor;
+import Processor.ServletProcess;
+import Processor.StaticResourceProcessor;
+import Requrest.Request;
+import Requrest.Response;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,7 +63,14 @@ public class HttpServer {
                 // create Response object
                 Response response = new Response(output);
                 response.setRequest(request);
-                response.sendStaticResource();
+                IProcessor processor;
+                if (request.getUri().startsWith("/servlet/")){
+                     processor = new ServletProcess();
+
+                }else{
+                     processor = new StaticResourceProcessor();
+                }
+                processor.process(request,response);
 
                 // Close the socket
                 socket.close();
